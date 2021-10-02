@@ -711,6 +711,9 @@ class DocumentSerializer(serializers.ModelSerializer):
             class Meta:
                 model = relation_info.related_model
                 depth_embedding = embedded_depth - 1
+                ref_name = f"{self.get_model().__name__}_{field_name}".replace(
+                    ".", "_"
+                ).replace("_child", "")
 
         # Apply customization to nested fields
         customization = self.get_customization_for_nested_field(field_name)
